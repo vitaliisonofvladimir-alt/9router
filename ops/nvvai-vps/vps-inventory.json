@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "snapshot_utc_date": "2026-11-09",
+  "source": {
+    "repository": "vitaliisonofvladimir-alt/9router",
+    "vps_head": "1fe586bb1cf35e1ed0cb2150a8ef7d1db040b21d",
+    "github_master_head": "1fe586bb1cf35e1ed0cb2150a8ef7d1db040b21d",
+    "vps_worktree_clean": true
+  },
+  "service": {
+    "name": "nvvai-9router.service",
+    "manager": "systemd --user",
+    "enabled": true,
+    "running_at_inspection": true,
+    "type": "simple",
+    "entrypoint": "node custom-server.js",
+    "preflight": "test -f custom-server.js",
+    "restart": "on-failure",
+    "restart_sec": "15s",
+    "memory_max": "1100M",
+    "cpu_quota": "75%",
+    "no_new_privileges": true,
+    "umask": "0077",
+    "limit_nofile": 8192
+  },
+  "runtime_env_keys": [
+    "JWT_SECRET",
+    "INITIAL_PASSWORD",
+    "API_KEY_SECRET",
+    "MACHINE_ID_SALT",
+    "DATA_DIR",
+    "NODE_ENV",
+    "PORT",
+    "HOSTNAME",
+    "BASE_URL",
+    "NEXT_PUBLIC_BASE_URL",
+    "ENABLE_REQUEST_LOGS",
+    "OBSERVABILITY_ENABLED",
+    "AUTH_COOKIE_SECURE",
+    "REQUIRE_API_KEY",
+    "NEXT_TELEMETRY_DISABLED"
+  ],
+  "host_only": [
+    "runtime.env",
+    ".9router/",
+    "data/",
+    "auth/",
+    "tunnel/state.json",
+    "cloudflared.pid"
+  ],
+  "tunnel_helpers_present": [
+    "9router-tunnel-enable-once.py",
+    "9router-tunnel-status.py",
+    "9router-tunnel-public-verify.py"
+  ],
+  "sync_scope": "sanitized deployment documentation only; no live credentials or runtime files",
+  "changes_to_vps": false,
+  "restart_performed": false
+}
