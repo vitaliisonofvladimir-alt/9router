@@ -1,0 +1,23 @@
+# Example only. Replace generic paths on the target host.
+# Do not copy secrets, host-specific URLs or live Environment= lines into Git.
+[Unit]
+Description=9router user service (sanitized example)
+After=network-online.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+WorkingDirectory=%h/9router/source
+EnvironmentFile=%h/9router/runtime.env
+ExecStartPre=/usr/bin/test -f %h/9router/source/custom-server.js
+ExecStart=/usr/bin/node custom-server.js
+Restart=on-failure
+RestartSec=15s
+MemoryMax=1100M
+CPUQuota=75%
+NoNewPrivileges=true
+UMask=0077
+LimitNOFILE=8192
+
+[Install]
+WantedBy=default.target
