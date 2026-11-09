@@ -1,0 +1,18 @@
+# Private deployment materials must never be added under this directory.
+runtime.env
+.env
+.env.*
+!.env.example
+.9router/
+data/
+auth/
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*
+*.pid
+*.key
+*.pem
+*.p12
+*.pfx
+*.log
